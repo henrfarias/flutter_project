@@ -8,11 +8,11 @@ class Database {
   int? _count;
 
   Database(DatabaseError exception,
-      {String url = '192.168.1.104',
+      {String url = '200.19.1.18',
       int port = 5432,
-      String db = 'flutter_db',
-      String user = 'postgres',
-      String password = 'secret'}) {
+      String db = 'henriquefarias',
+      String user = 'henriquefarias',
+      String password = '123456'}) {
     try {
       _conn = PostgreSQLConnection(url, port, db,
           queryTimeoutInSeconds: 1,

@@ -35,9 +35,11 @@ class UserRepository {
     return null;
   }
 
-  Future<User?> getUser() async {
-    var result =
-        await db.query('SELECT * FROM users', _callback, (err) => {print(err)});
+  Future<User?> getUser(String username, String password) async {
+    var result = await db.query(
+        "SELECT * FROM users WHERE name='$username' AND password='$password'",
+        _callback,
+        (err) => {print(err)});
     return result;
   }
 }

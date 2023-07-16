@@ -1,5 +1,7 @@
 import 'package:crud_flutter/components/action_button.dart';
+import 'package:crud_flutter/components/error_toast.dart';
 import 'package:crud_flutter/components/input.dart';
+import 'package:crud_flutter/interfaces/user.dart';
 import 'package:crud_flutter/pages/menu_page.dart';
 import 'package:crud_flutter/pages/register_page.dart';
 import 'package:crud_flutter/repository/user.repository.dart';
@@ -11,13 +13,20 @@ class LoginPage extends StatelessWidget {
   final passwordController = TextEditingController();
   final userRepository = UserRepository();
   void handleSignIn(BuildContext context) async {
-    var result = await userRepository.getUser();
+    var result = await userRepository.getUser(
+        usernameController.text, passwordController.text);
     if (result == null) {
-      print('NOT FOUND');
+      ErrorToast.showError(context, 'Login inválido.');
+      return;
     }
+    User user = User(
+        id: result.id,
+        name: result.name,
+        email: result.email,
+        password: result.password);
     if (!context.mounted) return;
     Navigator.push(
-        context, MaterialPageRoute(builder: (context) => MenuPage()));
+        context, MaterialPageRoute(builder: (context) => MenuPage(user: user)));
   }
 
   void navigateToRegisterPage(BuildContext context) {

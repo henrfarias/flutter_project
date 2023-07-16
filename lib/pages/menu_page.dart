@@ -1,14 +1,12 @@
+import 'package:crud_flutter/interfaces/menu_item.dart';
+import 'package:crud_flutter/interfaces/user.dart';
 import 'package:flutter/material.dart';
 
-class MenuItem {
-  final String name;
-  final double price;
-  final int quantity;
-
-  MenuItem({required this.name, required this.price, required this.quantity});
-}
-
 class MenuPage extends StatelessWidget {
+  final User user;
+
+  MenuPage({required this.user, super.key});
+
   final List<MenuItem> menuItems = [
     MenuItem(name: 'Prato 1', price: 10.0, quantity: 2),
     MenuItem(name: 'Prato 2', price: 15.0, quantity: 3),
@@ -29,7 +27,7 @@ class MenuPage extends StatelessWidget {
         itemBuilder: (context, index) {
           final menuItem = menuItems[index];
           return Card(
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             elevation: 2,
             child: ListTile(
               title: Row(
@@ -37,7 +35,7 @@ class MenuPage extends StatelessWidget {
                   Expanded(
                     child: Text(
                       menuItem.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -47,7 +45,7 @@ class MenuPage extends StatelessWidget {
                     alignment: Alignment.centerRight,
                     child: Text(
                       'R\$ ${menuItem.price.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
@@ -57,7 +55,7 @@ class MenuPage extends StatelessWidget {
               ),
               subtitle: Text(
                 'Sugerido para ${menuItem.quantity} pessoa${menuItem.quantity > 1 ? 's' : ''}.',
-                style: TextStyle(
+                style: const TextStyle(
                   fontStyle: FontStyle.italic,
                 ),
               ),
